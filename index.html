@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Title & Description for SEO -->
+  <title>BravePay</title>
+  <meta name="description" content="BravePay – The Bank for the Bold. Experience powerful, modern, and secure digital banking.">
+
+  <!-- Author -->
+  <meta name="author" content="BravePay Team">
+
+  <!-- Keywords (optional, some SEO tools still use this) -->
+  <meta name="keywords" content="BravePay, digital banking, mobile banking, secure banking, Nigeria bank, NDIC insured, CBN licensed">
+
+  <!-- Open Graph for Social Sharing -->
+  <meta property="og:title" content="BravePay – The Bank for the Bold">
+  <meta property="og:description" content="Licensed by the Central Bank of Nigeria and insured by NDIC, BravePay brings a secure, bold new banking experience.">
+  <meta property="og:image" content="https://yourdomain.com/images/preview.png"> <!-- Replace with real image -->
+  <meta property="og:url" content="https://bravepayfinancialservices.com">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="loader"></div>
+  </div>
+
+  <div class="ripple-background"></div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="background-text">BravePay</div> <!-- Background Text -->
+  
+    <div class="iphone-display">
+      <div class="screen-content" id="screenContent"></div>
+      <img id="screenFrame" src="images/iphone frame.png" alt="iPhone Frame" class="iphone-frame" />
+    </div>
+  </div>
+  
+
+    <div class="buttons">
+      <button onclick="changeGallery(0)">Onboarding</button>
+      <button onclick="changeGallery(1)">Home</button>
+      <button onclick="changeGallery(2)">Features</button>
+    </div>
+  </div>
+
+  <!-- Waiting List Section -->
+  <form id="waitlistForm" class="waitlist-form">
+    <input type="text" id="name" placeholder="Your name" required>
+    <input type="email" id="email" placeholder="Your email" required>
+    <button type="submit">Join the Waitlist</button>
+    <p id="statusMsg"></p>
+  </form>
+  
+
+  <script src="js/script.js"></script>
+  <script>
+    // Hide preloader on window load
+    window.addEventListener('load', () => {
+      const preloader = document.getElementById('preloader');
+      preloader.style.opacity = '0';
+      preloader.style.pointerEvents = 'none';
+      setTimeout(() => preloader.style.display = 'none', 1000);
+    });
+  </script>
+
+<script>
+  function createRipple(x, y) {
+    const ripple = document.createElement('div');
+    ripple.classList.add('ripple');
+
+    const size = Math.random() * 60 + 60; // random size 60–120px
+    ripple.style.width = ripple.style.height = `${size}px`;
+    ripple.style.left = `${x - size / 2}px`;
+    ripple.style.top = `${y - size / 2}px`;
+
+    document.querySelector('.ripple-background').appendChild(ripple);
+
+    setTimeout(() => {
+      ripple.remove();
+    }, 2000);
+  }
+
+  function randomRipple() {
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * window.innerHeight;
+    createRipple(x, y);
+  }
+
+  setInterval(randomRipple, 800); // new ripple every 0.8 seconds
+</script>
+
+<script>
+  const form = document.getElementById("waitlistForm");
+  const statusMsg = document.getElementById("statusMsg");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const data = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycby3LDirENWq4Ejw8XJqxcDYxnvHaWWPZbBtaGOQW7PGhvIEKuehQgC6xZPSv1Wdjh_AJQ/exec", {
+  method: "POST",
+  body: JSON.stringify({
+    name: document.getElementById("name").value,
+    email: document.getElementById("email").value
+  }),
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
+.then(res => res.json())
+.then(response => {
+  if (response.result === "success") {
+    statusMsg.textContent = "You're on the list, superstar 💖";
+    form.reset();
+  } else {
+    statusMsg.textContent = "Oops! Something went wrong 😢";
+  }
+})
+.catch(() => {
+  statusMsg.textContent = "Network error, baby 😩";
+});
+
+      
+  });
+</script>
+
+
+
+</body>
+
+</html>
+
